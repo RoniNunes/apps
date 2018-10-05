@@ -1,0 +1,17 @@
+Ubuntu or Debian
+
+# apt install python-dev python-pip
+
+Red Hat Enterprise Linux, CentOS, or Fedora
+
+# yum install python-devel python-pip
+
+
+Instalando openstack cliente
+
+# pip install python-openstackclient
+# pip install python-PROJECTclient
+
+actualizar o remover clientes
+# pip install --upgrade python-PROJECTclient
+# pip uninstall python-PROJECTclient
