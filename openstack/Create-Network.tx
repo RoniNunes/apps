@@ -1,0 +1,6 @@
+create net-create Private
+net-create Public
+neutron subnet-create Private --name PrivateSubnet --gateway 20.0.0.1 20.0.0.0/24
+router-create Mi-Router
+neutron router-interface-add Mi-Router PrivateSubnet
+router-gateway-set Mi-Router Public
