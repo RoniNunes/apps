@@ -1,0 +1,105 @@
+Instalando OpenStack com PackStack Primeiros Passos 1 Nó computacional.
+
+Antes de começar é imporntante obter a imagem do Linux centOS 7 Core ou Baixe a WM que deixei 
+pré configurada em 15 Agosto 2018 
+
+Inície o virtualbox e insira a ISO para a instalação do sistema operacional CentOS 7.
+
+No momento da instalação faça as configurações de rede e configure a senha de root.
+
+1. Atualize o sistema operacional
+
+Não faça a atualização com -y isso causará problemas com a instalação do OpenStack.
+
+2. Instale os pacotes dos centOS 7
+yum update
+yum install firewalld ntpd git wget nano openssh openssh-server openssh-clients openssl-libs
+
+2.1  cp /etc/ssh/sshd_config /etc/ssh/sshd_config.orig
+2.2  nano /etc/ssh/sshd_config
+2.3  Change the line:Port 22 to Port 22
+
+3. Habilote e Ative os programas necessários
+#systemctl enable firewalld ntpd NetworkManager
+#systemctl start firewalld ntpd NetworkManager
+#systemctl status firewalld ntpd NetworkManager
+#systemctl stop firewalld  NetworkManager
+#systemctl disable firewalld NetworkManager
+
+Edite os Seguintes arquivos de configuração.
+
+Edite o nano /etc/selinux/config  ( disabled ).
+
+Edite o hosts nano /etc/hosts ( 192.168.1.200 host stack.localdomain ).
+
+Atualize ou configure o servidor de horas opcional.
+
+ntpdate br.pool.ntp.org br.pool.ntp.org br.pool.ntp.org
+
+Essa é uma instalação onde não trabalhamos com --answer-file=FILE 
+sendo assim é recomendado deixar a placa de rede editada.
+
+Configure a placa de rede para melhor visualização e organização.
+
+cd /etc/sysconfig/network-scripts
+
+DEVICE="eth0"
+DEVICETYPE="eth0"
+TYPE="Ethernet"
+BOOTPROTO="static"
+IPADDR="192.168.1.200"
+NETMASK="255.255.255.0"
+GATEWAY="192.168.1.1"
+DNS="8.8.8.8"
+ONBOOT="yes"
+
+Antes de começar a instalar o OpenStack NÃO ESQUEÇA DE REINICIAR A MAQUINA VIRTUAL.!!!!!!!!!
+
+
+*****************************************************************************************************************
+
+    Versão instalada em 15 08 2018  é OpenStack Release Queens
+
+#yum install centos-release-openstack-queens
+
+Instala a release 
+
+#yum update 
+
+atualize novamente o centOS 7
+
+#yum install openstack-packstack
+
+Instale o PackStack 
+
+#packstack --allinone --provision-demo=n --neutron-fwaas=y --os-neutron-lbaas-install=y  --os-heat-install=y 
+
+
+
+===================================================================
+instalar CLI
+
+# yum install -y python-pip 
+
+# yum install -y build-essential
+# yum install -y python-dev libxslt1-dev libxl12-dev
+# pip install python-openstackclient
+
+===================================================================
+Accesar desde otra consola ssh:
+
+Fazer download do arquivo keustonerc_admin
+
+acceso e segurança => acceso a API=> baixar arquivo Opensatack RC.
+copiar dados do  Keystonerc_admin e pasar ao cliente  criar nano openstac.sh
+
+source openstack.sh
+
+
+
+
+
+
+
+
+
