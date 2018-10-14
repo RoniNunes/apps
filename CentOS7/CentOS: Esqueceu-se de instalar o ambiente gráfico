@@ -10,6 +10,10 @@ usando para isso o seguinte comando:
 
 # sudo yum groups install "GNOME Desktop"
 
+
+(Opcional) Depois de instalado podem executar o seguinte comando, 
+para que o sistema arranque directo para o ambiente gráfico.
+
 # systemctl set-default graphical.target
 
 
