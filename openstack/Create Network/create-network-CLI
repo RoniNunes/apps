@@ -1,0 +1,177 @@
+CREATE NETWORK:
+
+[root@openstack ~(keystone_admin)]#openstack network create Interna --project admin
+
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | UP                                   |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2018-10-14T14:00:26Z                 |
+| description               |                                      |
+| dns_domain                | None                                 |
+| id                        | ff447acf-2f01-476b-a75d-08f1a7d81be3 |
+| ipv4_address_scope        | None                                 |
+| ipv6_address_scope        | None                                 |
+| is_default                | False                                |
+| is_vlan_transparent       | None                                 |
+| mtu                       | 1450                                 |
+| name                      | Interna                              |
+| port_security_enabled     | True                                 |
+| project_id                | 0adef96c109d425e828e13d324757635     |
+| provider:network_type     | vxlan                                |
+| provider:physical_network | None                                 |
+| provider:segmentation_id  | 22                                   |
+| qos_policy_id             | None                                 |
+| revision_number           | 2                                    |
+| router:external           | Internal                             |
+| segments                  | None                                 |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| updated_at                | 2018-10-14T14:00:53Z                 |
++---------------------------+--------------------------------------+
+
+CREATE NETWORK EXTERNAL:
+
+[root@openstack ~(keystone_admin)]# openstack network create Externa --project admin --external
+
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | UP                                   |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2018-10-14T14:06:05Z                 |
+| description               |                                      |
+| dns_domain                | None                                 |
+| id                        | 3140056d-c7d9-4dff-bd1a-aa0aa69091b4 |
+| ipv4_address_scope        | None                                 |
+| ipv6_address_scope        | None                                 |
+| is_default                | False                                |
+| is_vlan_transparent       | None                                 |
+| mtu                       | 1450                                 |
+| name                      | Externa                              |
+| port_security_enabled     | True                                 |
+| project_id                | 0adef96c109d425e828e13d324757635     |
+| provider:network_type     | vxlan                                |
+| provider:physical_network | None                                 |
+| provider:segmentation_id  | 72                                   |
+| qos_policy_id             | None                                 |
+| revision_number           | 5                                    |
+| router:external           | External                             |
+| segments                  | None                                 |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| updated_at                | 2018-10-14T14:06:34Z                 |
++---------------------------+--------------------------------------+
+
+CREATE SUBNET INTERNA:
+
+[root@openstack ~(keystone_admin)]# openstack subnet create Sub_Interna --network Interna --subnet-range 10.1.1.0/24 --allocation-pool start=10.1.1.50,end=10.1.1.240
+
++-------------------+--------------------------------------+
+| Field             | Value                                |
++-------------------+--------------------------------------+
+| allocation_pools  | 10.1.1.50-10.1.1.240                 |
+| cidr              | 10.1.1.0/24                          |
+| created_at        | 2018-10-14T14:17:46Z                 |
+| description       |                                      |
+| dns_nameservers   |                                      |
+| enable_dhcp       | True                                 |
+| gateway_ip        | 10.1.1.1                             |
+| host_routes       |                                      |
+| id                | 34ad812c-8896-497b-adc4-a7272e3402c5 |
+| ip_version        | 4                                    |
+| ipv6_address_mode | None                                 |
+| ipv6_ra_mode      | None                                 |
+| name              | Sub_Interna                          |
+| network_id        | ff447acf-2f01-476b-a75d-08f1a7d81be3 |
+| project_id        | 0adef96c109d425e828e13d324757635     |
+| revision_number   | 0                                    |
+| segment_id        | None                                 |
+| service_types     |                                      |
+| subnetpool_id     | None                                 |
+| tags              |                                      |
+| updated_at        | 2018-10-14T14:17:46Z                 |
++-------------------+--------------------------------------+
+
+CREATE SUBNET INTERNA:
+#--provider-network-type vxlan
+
+[root@openstack ~(keystone_admin)]# openstack subnet create Sub_Externa --network Externa --subnet-range 192.168.1.0/24 --allocation-pool start=192.168.1.50,end=192.168.1.250 
++-------------------+--------------------------------------+
+| Field             | Value                                |
++-------------------+--------------------------------------+
+| allocation_pools  | 192.168.1.50-192.168.1.250           |
+| cidr              | 192.168.1.0/24                       |
+| created_at        | 2018-10-14T14:29:17Z                 |
+| description       |                                      |
+| dns_nameservers   |                                      |
+| enable_dhcp       | True                                 |
+| gateway_ip        | 192.168.1.1                          |
+| host_routes       |                                      |
+| id                | c9c3ecd0-2e70-4d75-8a9e-8fa5c42f78d6 |
+| ip_version        | 4                                    |
+| ipv6_address_mode | None                                 |
+| ipv6_ra_mode      | None                                 |
+| name              | Sub_Externa                          |
+| network_id        | 3140056d-c7d9-4dff-bd1a-aa0aa69091b4 |
+| project_id        | 0adef96c109d425e828e13d324757635     |
+| revision_number   | 0                                    |
+| segment_id        | None                                 |
+| service_types     |                                      |
+| subnetpool_id     | None                                 |
+| tags              |                                      |
+| updated_at        | 2018-10-14T14:29:17Z                 |
++-------------------+--------------------------------------+
+
+CREATE ROUTER:
+
+[root@openstack ~(keystone_admin)]# openstack router create Router01
++-------------------------+--------------------------------------+
+| Field                   | Value                                |
++-------------------------+--------------------------------------+
+| admin_state_up          | UP                                   |
+| availability_zone_hints |                                      |
+| availability_zones      |                                      |
+| created_at              | 2018-10-14T14:43:35Z                 |
+| description             |                                      |
+| distributed             | False                                |
+| external_gateway_info   | None                                 |
+| flavor_id               | None                                 |
+| ha                      | False                                |
+| id                      | 727e5037-4a87-4b1e-8473-16d7035491fe |
+| name                    | Router01                             |
+| project_id              | 0adef96c109d425e828e13d324757635     |
+| revision_number         | 0                                    |
+| routes                  |                                      |
+| status                  | ACTIVE                               |
+| tags                    |                                      |
+| updated_at              | 2018-10-14T14:43:35Z                 |
++-------------------------+--------------------------------------+
+
+1. Link the router to the external provider network:
+
+$ openstack router set ROUTER --external-gateway NETWORK
+
+Replace ROUTER with the unique identifier of the router, replace NETWORK with the unique identifier of the external provider
+network.
+
+2. Link the router to the subnet:
+
+$ openstack router add subnet ROUTER SUBNET
+Replace ROUTER with the unique identifier of the router, replace SUBNET with the unique identifier of the subnet.
+
+
+
+[root@openstack ~(keystone_admin)]# openstack router add subnet Router01 Sub_Externa
+
+
+[root@openstack ~(keystone_admin)]# openstack router add subnet Router01 Sub_Interna
+
+END
