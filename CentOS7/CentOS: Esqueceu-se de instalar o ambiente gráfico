@@ -1,0 +1,19 @@
+Como instalar o GNOME Desktop?
+
+Antes de instalar o GNOME Desktop certifique-se que a sua máquina tem ligação à Internet. Em caso afirmativo, 
+vamos usar recorrer à ferramenta yum, executando o seguinte comando:
+
+# yum grouplist
+
+Depois de apresentada a lista dos “grupos de software”, devem proceder à instalação do grupo GNOME Desktop,
+usando para isso o seguinte comando:
+
+# sudo yum groups install "GNOME Desktop"
+
+# systemctl set-default graphical.target
+
+
+
+Caso pretendam arrancar de imediato com o sistema gráfico devem usar o seguinte comando:
+
+# systemctl start graphical.target
