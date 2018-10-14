@@ -32,3 +32,41 @@ Subir el fichero:
 
 Descargar una imagene subida a glance .
 openstack image save cirros --file /root/img/lin/cirros_copy.img
+
+
+ openstack server create prueba --nic net-id=b3c40f22-5b64-49fc-9ea3-fa6df3cf7995 --flavor m1.tiny --image cirros
++-------------------------------------+-----------------------------------------------+
+| Field                               | Value                                         |
++-------------------------------------+-----------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                        |
+| OS-EXT-AZ:availability_zone         |                                               |
+| OS-EXT-SRV-ATTR:host                | None                                          |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                          |
+| OS-EXT-SRV-ATTR:instance_name       |                                               |
+| OS-EXT-STS:power_state              | NOSTATE                                       |
+| OS-EXT-STS:task_state               | scheduling                                    |
+| OS-EXT-STS:vm_state                 | building                                      |
+| OS-SRV-USG:launched_at              | None                                          |
+| OS-SRV-USG:terminated_at            | None                                          |
+| accessIPv4                          |                                               |
+| accessIPv6                          |                                               |
+| addresses                           |                                               |
+| adminPass                           | uca8wgJyTGsU                                  |
+| config_drive                        |                                               |
+| created                             | 2018-10-14T16:43:09Z                          |
+| flavor                              | m1.tiny (1)                                   |
+| hostId                              |                                               |
+| id                                  | 182f9976-51d5-41b4-a499-d771f13386fb          |
+| image                               | cirros (fb6a24ff-75f7-42f8-ab99-0883524ce868) |
+| key_name                            | None                                          |
+| name                                | prueba                                        |
+| progress                            | 0                                             |
+| project_id                          | 0adef96c109d425e828e13d324757635              |
+| properties                          |                                               |
+| security_groups                     | name='default'                                |
+| status                              | BUILD                                         |
+| updated                             | 2018-10-14T16:43:09Z                          |
+| user_id                             | 0c844c444f724012a14efc8a7efe9cc1              |
+| volumes_attached                    |                                               |
++-------------------------------------+-----------------------------------------------+
+
