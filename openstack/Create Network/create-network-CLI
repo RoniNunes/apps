@@ -175,3 +175,4 @@ Replace ROUTER with the unique identifier of the router, replace SUBNET with the
 [root@openstack ~(keystone_admin)]# openstack router add subnet Router01 Sub_Interna
 
 END
+
