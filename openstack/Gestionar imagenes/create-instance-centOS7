@@ -1,0 +1,74 @@
+
+
+
+CREATE IMAGE CENTOS7
+
+
+# openstack image create CentOS-7-x86-64 --file /root/img/CentOS-7-x86_64-Azure-1711.qcow2 \
+--min-ram 64 --min-disk 1 --disk-format qcow2
+
+
++------------------+------------------------------------------------------+
+| Field            | Value                                                |
++------------------+------------------------------------------------------+
+| checksum         | fde02bb51d5d31e566c07f17c4b27962                     |
+| container_format | bare                                                 |
+| created_at       | 2018-10-14T17:14:56Z                                 |
+| disk_format      | qcow2                                                |
+| file             | /v2/images/052a11c2-9cb8-4b69-a9a5-7c6b93898644/file |
+| id               | 052a11c2-9cb8-4b69-a9a5-7c6b93898644                 |
+| min_disk         | 1                                                    |
+| min_ram          | 64                                                   |
+| name             | CentOS-7-x86-64                                      |
+| owner            | 0adef96c109d425e828e13d324757635                     |
+| protected        | False                                                |
+| schema           | /v2/schemas/image                                    |
+| size             | 1218445312                                           |
+| status           | active                                               |
+| tags             |                                                      |
+| updated_at       | 2018-10-14T17:15:23Z                                 |
+| virtual_size     | None                                                 |
+| visibility       | shared                                               |
++------------------+------------------------------------------------------+
+
+
+Create instance CentOS7:
+
+
+# openstack server create Ser-CentOS7 --nic net-id=b3c40f22-5b64-49fc-9ea3-fa6df3cf7995 \
+--flavor m1.small --image CentOS-7-x86-64
+
++-------------------------------------+--------------------------------------------------------+
+| Field                               | Value                                                  |
++-------------------------------------+--------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                 |
+| OS-EXT-AZ:availability_zone         |                                                        |
+| OS-EXT-SRV-ATTR:host                | None                                                   |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                   |
+| OS-EXT-SRV-ATTR:instance_name       |                                                        |
+| OS-EXT-STS:power_state              | NOSTATE                                                |
+| OS-EXT-STS:task_state               | scheduling                                             |
+| OS-EXT-STS:vm_state                 | building                                               |
+| OS-SRV-USG:launched_at              | None                                                   |
+| OS-SRV-USG:terminated_at            | None                                                   |
+| accessIPv4                          |                                                        |
+| accessIPv6                          |                                                        |
+| addresses                           |                                                        |
+| adminPass                           | g9jWRQCkZ5vn                                           |
+| config_drive                        |                                                        |
+| created                             | 2018-10-14T17:18:56Z                                   |
+| flavor                              | m1.small (2)                                           |
+| hostId                              |                                                        |
+| id                                  | 1ec960b5-bfa0-4a84-8370-187738d32261                   |
+| image                               | CentOS-7-x86-64 (052a11c2-9cb8-4b69-a9a5-7c6b93898644) |
+| key_name                            | None                                                   |
+| name                                | Ser-CentOS7                                            |
+| progress                            | 0                                                      |
+| project_id                          | 0adef96c109d425e828e13d324757635                       |
+| properties                          |                                                        |
+| security_groups                     | name='default'                                         |
+| status                              | BUILD                                                  |
+| updated                             | 2018-10-14T17:18:56Z                                   |
+| user_id                             | 0c844c444f724012a14efc8a7efe9cc1                       |
+| volumes_attached                    |                                                        |
++-------------------------------------+--------------------------------------------------------+
