@@ -1,0 +1,54 @@
+Este ejemplo crea una imagen qcow2 de Windows Server 2012, utilizando el comando virt-install y el hipervisor KVM.
+
+Siga estos pasos para preparar la instalación:
+
+Descargar una instalación de Windows Server 2012 ISO. Las imágenes de evaluación están disponibles en el sitio web de Microsoft (es necesario registrarse).
+
+Descargue los controladores ISO firmados por VirtIO desde el sitio web de Fedora .
+
+Crea una imagen qcow2 de 15 GB:
+
+$ qemu-img create -f qcow2 ws2012.qcow2 15G
+Inicie la instalación de Windows Server 2012 con el comando virt-install :
+
+# virt-install --connect qemu:///system \
+  --name ws2012 --ram 2048 --vcpus 2 \
+  --network network=default,model=virtio \
+  --disk path=ws2012.qcow2,format=qcow2,device=disk,bus=virtio \
+  --cdrom /path/to/en_windows_server_2012_x64_dvd.iso \
+  --disk path=/path/to/virtio-win-0.1-XX.iso,device=cdrom \
+  --vnc --os-type windows --os-variant win2k12 \
+  --os-distro windows --os-version 2012
+Utilice virt-manager o virt-viewer para conectarse a la máquina virtual e iniciar la instalación de Windows.
+
+Habilitar los drivers de virtio.
+
+El instalador de Windows no detecta el disco de forma predeterminada. Cuando se le solicite elegir un destino de instalación, haga clic en Cargar controlador y busque el sistema de archivos para seleccionar la E:\virtio-win-0.1XX\viostor\2k12\amd64carpeta. El instalador de Windows muestra una lista de controladores para instalar. Seleccione los controladores de red y SCSI de VirtIO y continúe con la instalación.
+
+Una vez que se completa la instalación, la máquina virtual se reinicia. Defina una contraseña para el administrador cuando se le solicite.
+
+Inicie sesión como administrador e inicie una ventana de comando.
+
+Complete la instalación de los controladores de VirtIO ejecutando el siguiente comando:
+
+C:\pnputil -i -a E:\virtio-win-0.1XX\viostor\2k12\amd64\*.INF
+Para permitir que Cloudbase-Init ejecute scripts durante un inicio de instancia, configure la política de ejecución de PowerShell para que no esté restringida:
+
+C:\powershell
+C:\Set-ExecutionPolicy Unrestricted
+Descargue e instale el Cloudbase-Init:
+
+C:\Invoke-WebRequest -UseBasicParsing https://cloudbase.it/downloads/CloudbaseInitSetup_Stable_x64.msi -OutFile cloudbaseinit.msi
+C:\.\cloudbaseinit.msi
+En la ventana de opciones de configuración , cambie la siguiente configuración:
+
+Nombre de usuario: Administrator
+Adaptador de red para configurar: Red Hat VirtIO Ethernet Adapter
+Puerto serie para el registro: COM1
+Cuando finalice la instalación, en la ventana Completar el asistente de configuración de Cloudbase-Init , seleccione las casillas de verificación Ejecutar Sysprep y Apagar y haga clic en Finalizar .
+
+Espera a que se apague la máquina.
+
+Su imagen está lista para subir al servicio de imágenes:
+
+$ openstack image create --disk-format qcow2 --file ws2012.qcow2 WS2012
