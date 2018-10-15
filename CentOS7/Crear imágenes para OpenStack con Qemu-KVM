@@ -1,0 +1,34 @@
+Después de crear la VM con CentOS y antes de instalar QEMU en ella, comprobaremos si 
+tenemos habilitada la opción Virtualización en la cpu.
+
+
+
+Escribiremos grep-E ‘(vmx|svm)’ /proc/cpuinfo
+
+Si no nos muestra nada la salida de el comando, significa que lo tenemos deshabilitado.
+
+Instalamos todo lo necesario  con yum install
+
+ yum install -y qemu-kvm qemu-img virt-manager libvirt libvirt-python libvirt-client virt-install virt-viewer bridge-utils
+ 
+ 
+ Una vez instalado ejecutamos como root desde la consola escribiendo virt-manager para que se inicie el gestor de máquinas virtuales.
+ 
+ Seguramente os encontréis con el siguiente error al crear una VM, os dirá que no encuentra el UEFI
+ 
+ Para solucionarlo bastará con instalar el paquete OVMF
+ 
+ 
+ Comecemos a crear la maquina virtual:
+ 
+ 
+ Editaremos el tipo de bus de disco de IDE (viene por defecto) al de VirtIO
+ 
+ Drivers:
+ https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+ 
+ 
+ 
+ Interesantes:
+ 
+ https://docs.openstack.org/image-guide/windows-image.html
