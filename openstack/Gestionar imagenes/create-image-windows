@@ -1,5 +1,5 @@
-[root@openstack img(keystone_admin)]# openstack image create Windows-10-x86 
---file /root/img/Windows10_86x.qcow2 --min-ram 512 --min-disk 20 --disk-format qcow2
+openstack image create Windows-10-x86 --file /root/img/Windows10_86x.qcow2 --min-ram 512 --min-disk 20 --disk-format qcow2
+
 +------------------+------------------------------------------------------+
 | Field            | Value                                                |
 +------------------+------------------------------------------------------+
@@ -22,15 +22,13 @@
 | virtual_size     | None                                                 |
 | visibility       | shared                                               |
 +------------------+------------------------------------------------------+
-[root@openstack img(keystone_admin)]# openstack server create Windows-10-x86 --nic 
-net-id=d006186a-d1a7-4316-81b5-8e4f5760d2d9 --flavor m1.small --image Windows-10-x86
+# openstack server create Windows-10-x86 --nic net-id=d006186a-d1a7-4316-81b5-8e4f5760d2d9 --flavor m1.small --image Windows-10-x86
 
 El disco Flavor es demasiado pequeño para la imagen solicitada. El disco Flavor tiene 
 21474836480 bytes, la imagen tiene 22759800832 bytes. (HTTP 400) (Request-ID: req-f35fa658-ed07-48ee-a4b0-00e0d47efeac)
 
+# openstack server create Windows-10-x86 --nic net-id=d006186a-d1a7-4316-81b5-8e4f5760d2d9 --flavor m1.medium --image Windows-10-x86
 
-[root@openstack img(keystone_admin)]# openstack server create Windows-10-x86 --nic 
-net-id=d006186a-d1a7-4316-81b5-8e4f5760d2d9 --flavor m1.medium --image Windows-10-x86
 +-------------------------------------+-------------------------------------------------------+
 | Field                               | Value                                                 |
 +-------------------------------------+-------------------------------------------------------+
