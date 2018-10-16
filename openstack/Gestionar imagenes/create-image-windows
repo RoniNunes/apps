@@ -1,0 +1,67 @@
+[root@openstack img(keystone_admin)]# openstack image create Windows-10-x86 
+--file /root/img/Windows10_86x.qcow2 --min-ram 512 --min-disk 20 --disk-format qcow2
++------------------+------------------------------------------------------+
+| Field            | Value                                                |
++------------------+------------------------------------------------------+
+| checksum         | 974304c2cda0c645b8df3742dd7c5147                     |
+| container_format | bare                                                 |
+| created_at       | 2018-10-15T22:51:32Z                                 |
+| disk_format      | qcow2                                                |
+| file             | /v2/images/0be40944-2b52-474b-bd61-61315f7f8adf/file |
+| id               | 0be40944-2b52-474b-bd61-61315f7f8adf                 |
+| min_disk         | 20                                                   |
+| min_ram          | 512                                                  |
+| name             | Windows-10-x86                                       |
+| owner            | 6ec89a87742345599c425e8858f1b5c6                     |
+| protected        | False                                                |
+| schema           | /v2/schemas/image                                    |
+| size             | 22759800832                                          |
+| status           | active                                               |
+| tags             |                                                      |
+| updated_at       | 2018-10-15T23:03:09Z                                 |
+| virtual_size     | None                                                 |
+| visibility       | shared                                               |
++------------------+------------------------------------------------------+
+[root@openstack img(keystone_admin)]# openstack server create Windows-10-x86 --nic 
+net-id=d006186a-d1a7-4316-81b5-8e4f5760d2d9 --flavor m1.small --image Windows-10-x86
+
+El disco Flavor es demasiado pequeño para la imagen solicitada. El disco Flavor tiene 
+21474836480 bytes, la imagen tiene 22759800832 bytes. (HTTP 400) (Request-ID: req-f35fa658-ed07-48ee-a4b0-00e0d47efeac)
+
+
+[root@openstack img(keystone_admin)]# openstack server create Windows-10-x86 --nic 
+net-id=d006186a-d1a7-4316-81b5-8e4f5760d2d9 --flavor m1.medium --image Windows-10-x86
++-------------------------------------+-------------------------------------------------------+
+| Field                               | Value                                                 |
++-------------------------------------+-------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                |
+| OS-EXT-AZ:availability_zone         |                                                       |
+| OS-EXT-SRV-ATTR:host                | None                                                  |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                  |
+| OS-EXT-SRV-ATTR:instance_name       |                                                       |
+| OS-EXT-STS:power_state              | NOSTATE                                               |
+| OS-EXT-STS:task_state               | scheduling                                            |
+| OS-EXT-STS:vm_state                 | building                                              |
+| OS-SRV-USG:launched_at              | None                                                  |
+| OS-SRV-USG:terminated_at            | None                                                  |
+| accessIPv4                          |                                                       |
+| accessIPv6                          |                                                       |
+| addresses                           |                                                       |
+| adminPass                           | wNWdNgnETnD4                                          |
+| config_drive                        |                                                       |
+| created                             | 2018-10-15T23:07:59Z                                  |
+| flavor                              | m1.medium (3)                                         |
+| hostId                              |                                                       |
+| id                                  | a5cdc75a-5091-4d97-9266-ed6bd97007cd                  |
+| image                               | Windows-10-x86 (0be40944-2b52-474b-bd61-61315f7f8adf) |
+| key_name                            | None                                                  |
+| name                                | Windows-10-x86                                        |
+| progress                            | 0                                                     |
+| project_id                          | 6ec89a87742345599c425e8858f1b5c6                      |
+| properties                          |                                                       |
+| security_groups                     | name='default'                                        |
+| status                              | BUILD                                                 |
+| updated                             | 2018-10-15T23:07:59Z                                  |
+| user_id                             | 7a17ea1ec7334a7f8ddb2934c5038d91                      |
+| volumes_attached                    |                                                       |
++-------------------------------------+-------------------------------------------------------+
