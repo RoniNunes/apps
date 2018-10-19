@@ -19,9 +19,9 @@ yum install firewalld ntpd git wget nano openssh openssh-server openssh-clients 
 2.3  Change the line:Port 22 to Port 22
 
 3. Habilote e Ative os programas necessários
-# systemctl enable firewalld ntpd NetworkManager
-# systemctl start firewalld ntpd NetworkManager
-# systemctl status firewalld ntpd NetworkManager
+# systemctl enable firewalld  NetworkManager
+# systemctl start firewalld NetworkManager
+# systemctl status firewalld NetworkManager
 # systemctl stop firewalld  NetworkManager
 # systemctl disable firewalld NetworkManager
 
