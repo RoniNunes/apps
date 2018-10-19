@@ -95,9 +95,12 @@ atualize novamente o centOS 7
 
 Instale o PackStack 
 
+Opcion 1===================================================================
+packstack --allinone --provision-demo=n --os-neutron-ovs-bridge-mappings=extnet:br-ex
+--os-neutron-ovs-bridge-interfaces=br-ex:eth0 --os-neutron-ml2-type-drivers=vxlan,flat
+
+Opcion 2===================================================================
 # packstack --allinone --provision-demo=n --neutron-fwaas=y --os-neutron-lbaas-install=y --os-heat-install=y 
-
-
 ===================================================================
 instalar CLI
 
