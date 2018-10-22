@@ -1,0 +1,238 @@
+Create network external:
+
+1
+# neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external
+
+neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
+Created a new network:
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2018-10-22T08:00:41Z                 |
+| description               |                                      |
+| id                        | da6edccf-97fc-4a3f-8d02-b0fea311d862 |
+| ipv4_address_scope        |                                      |
+| ipv6_address_scope        |                                      |
+| is_default                | False                                |
+| mtu                       | 1500                                 |
+| name                      | external_network                     |
+| port_security_enabled     | True                                 |
+| project_id                | 6ec89a87742345599c425e8858f1b5c6     |
+| provider:network_type     | flat                                 |
+| provider:physical_network | extnet                               |
+| provider:segmentation_id  |                                      |
+| qos_policy_id             |                                      |
+| revision_number           | 5                                    |
+| router:external           | True                                 |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| tenant_id                 | 6ec89a87742345599c425e8858f1b5c6     |
+| updated_at                | 2018-10-22T08:00:41Z                 |
++---------------------------+--------------------------------------+
+
+2
+#
+
+neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.1.20,end=192.168.1.20 --gateway=192.168.1.1 external_network 192.168.1.0/24
+neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
+Created a new subnet:
++-------------------+--------------------------------------------------+
+| Field             | Value                                            |
++-------------------+--------------------------------------------------+
+| allocation_pools  | {"start": "192.168.1.20", "end": "192.168.1.20"} |
+| cidr              | 192.168.1.0/24                                   |
+| created_at        | 2018-10-22T08:01:08Z                             |
+| description       |                                                  |
+| dns_nameservers   |                                                  |
+| enable_dhcp       | False                                            |
+| gateway_ip        | 192.168.1.1                                      |
+| host_routes       |                                                  |
+| id                | dab48ed8-0f0a-4c32-b743-0c085f42fd5a             |
+| ip_version        | 4                                                |
+| ipv6_address_mode |                                                  |
+| ipv6_ra_mode      |                                                  |
+| name              | public_subnet                                    |
+| network_id        | da6edccf-97fc-4a3f-8d02-b0fea311d862             |
+| project_id        | 6ec89a87742345599c425e8858f1b5c6                 |
+| revision_number   | 0                                                |
+| service_types     |                                                  |
+| subnetpool_id     |                                                  |
+| tags              |                                                  |
+| tenant_id         | 6ec89a87742345599c425e8858f1b5c6                 |
+| updated_at        | 2018-10-22T08:01:08Z                             |
++-------------------+--------------------------------------------------+
+
+3
+
+[root@openstack ~(keystone_admin)]# neutron router-create Router1
+neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
+Created a new router:
++-------------------------+--------------------------------------+
+| Field                   | Value                                |
++-------------------------+--------------------------------------+
+| admin_state_up          | True                                 |
+| availability_zone_hints |                                      |
+| availability_zones      |                                      |
+| created_at              | 2018-10-22T08:07:25Z                 |
+| description             |                                      |
+| distributed             | False                                |
+| external_gateway_info   |                                      |
+| flavor_id               |                                      |
+| ha                      | False                                |
+| id                      | 888c07d1-a588-405c-8cb8-93e3c90fbc07 |
+| name                    | Router1                              |
+| project_id              | 6ec89a87742345599c425e8858f1b5c6     |
+| revision_number         | 1                                    |
+| routes                  |                                      |
+| status                  | ACTIVE                               |
+| tags                    |                                      |
+| tenant_id               | 6ec89a87742345599c425e8858f1b5c6     |
+| updated_at              | 2018-10-22T08:07:25Z                 |
++-------------------------+--------------------------------------+
+
+4
+
+[root@openstack ~(keystone_admin)]# neutron router-gateway-set Router1 external_network
+neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
+Set gateway for router Router1
+
+5
+[root@openstack ~(keystone_admin)]# neutron net-create Internal_network
+neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
+Created a new network:
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2018-10-22T08:09:23Z                 |
+| description               |                                      |
+| id                        | 1b3480fb-2ff3-4a8c-a432-246aa52506bc |
+| ipv4_address_scope        |                                      |
+| ipv6_address_scope        |                                      |
+| is_default                | False                                |
+| mtu                       | 1450                                 |
+| name                      | Internal_network                     |
+| port_security_enabled     | True                                 |
+| project_id                | 6ec89a87742345599c425e8858f1b5c6     |
+| provider:network_type     | vxlan                                |
+| provider:physical_network |                                      |
+| provider:segmentation_id  | 10                                   |
+| qos_policy_id             |                                      |
+| revision_number           | 2                                    |
+| router:external           | False                                |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| tenant_id                 | 6ec89a87742345599c425e8858f1b5c6     |
+| updated_at                | 2018-10-22T08:09:23Z                 |
++---------------------------+--------------------------------------+
+
+6
+
+[root@openstack ~(keystone_admin)]# neutron subnet-create --name Internal_subnet Internal_network 10.0.0.0/24
+neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
+Created a new subnet:
++-------------------+--------------------------------------------+
+| Field             | Value                                      |
++-------------------+--------------------------------------------+
+| allocation_pools  | {"start": "10.0.0.2", "end": "10.0.0.254"} |
+| cidr              | 10.0.0.0/24                                |
+| created_at        | 2018-10-22T08:10:49Z                       |
+| description       |                                            |
+| dns_nameservers   |                                            |
+| enable_dhcp       | True                                       |
+| gateway_ip        | 10.0.0.1                                   |
+| host_routes       |                                            |
+| id                | 3f628a17-cae6-47d4-9c37-bad0275dd93a       |
+| ip_version        | 4                                          |
+| ipv6_address_mode |                                            |
+| ipv6_ra_mode      |                                            |
+| name              | Internal_subnet                            |
+| network_id        | 1b3480fb-2ff3-4a8c-a432-246aa52506bc       |
+| project_id        | 6ec89a87742345599c425e8858f1b5c6           |
+| revision_number   | 0                                          |
+| service_types     |                                            |
+| subnetpool_id     |                                            |
+| tags              |                                            |
+| tenant_id         | 6ec89a87742345599c425e8858f1b5c6           |
+| updated_at        | 2018-10-22T08:10:49Z                       |
++-------------------+--------------------------------------------+
+
+7
+
+[root@openstack ~(keystone_admin)]# neutron router-interface-add Router1 Internal_subnet
+neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
+Added interface b6a59a18-2ce8-44d8-a22c-a2723e53704d to router Router1.
+
+8
+
+[root@openstack ~(keystone_admin)]# openstack network create Interna20 --project admin
++---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | UP                                   |
+| availability_zone_hints   |                                      |
+| availability_zones        |                                      |
+| created_at                | 2018-10-22T08:34:00Z                 |
+| description               |                                      |
+| dns_domain                | None                                 |
+| id                        | a266a521-7995-4262-b52c-2e7006e4595b |
+| ipv4_address_scope        | None                                 |
+| ipv6_address_scope        | None                                 |
+| is_default                | False                                |
+| is_vlan_transparent       | None                                 |
+| mtu                       | 1450                                 |
+| name                      | Interna20                            |
+| port_security_enabled     | True                                 |
+| project_id                | 6ec89a87742345599c425e8858f1b5c6     |
+| provider:network_type     | vxlan                                |
+| provider:physical_network | None                                 |
+| provider:segmentation_id  | 41                                   |
+| qos_policy_id             | None                                 |
+| revision_number           | 2                                    |
+| router:external           | Internal                             |
+| segments                  | None                                 |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   |                                      |
+| tags                      |                                      |
+| updated_at                | 2018-10-22T08:34:00Z                 |
++---------------------------+--------------------------------------+
+
+9
+
+[root@openstack ~(keystone_admin)]# openstack subnet create Sub_Interna20 --network Interna20 --subnet-range 20.1.1.1/24
++-------------------+--------------------------------------+
+| Field             | Value                                |
++-------------------+--------------------------------------+
+| allocation_pools  | 20.1.1.2-20.1.1.254                  |
+| cidr              | 20.1.1.0/24                          |
+| created_at        | 2018-10-22T08:40:02Z                 |
+| description       |                                      |
+| dns_nameservers   |                                      |
+| enable_dhcp       | True                                 |
+| gateway_ip        | 20.1.1.1                             |
+| host_routes       |                                      |
+| id                | 560d2b7e-e70e-4db0-8fd8-6aedbb05ff94 |
+| ip_version        | 4                                    |
+| ipv6_address_mode | None                                 |
+| ipv6_ra_mode      | None                                 |
+| name              | Sub_Interna20                        |
+| network_id        | a266a521-7995-4262-b52c-2e7006e4595b |
+| project_id        | 6ec89a87742345599c425e8858f1b5c6     |
+| revision_number   | 0                                    |
+| segment_id        | None                                 |
+| service_types     |                                      |
+| subnetpool_id     | None                                 |
+| tags              |                                      |
+| updated_at        | 2018-10-22T08:40:02Z                 |
++-------------------+--------------------------------------+
+
