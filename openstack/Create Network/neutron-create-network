@@ -1,7 +1,7 @@
 Create network external:
 
 1
-# neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external
+# neutron net-create External_network --provider:network_type flat --provider:physical_network extnet  --router:external
 
 neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
 Created a new network:
@@ -38,7 +38,7 @@ Created a new network:
 2
 #
 
-neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.1.20,end=192.168.1.20 --gateway=192.168.1.1 external_network 192.168.1.0/24
+neutron subnet-create --name Public_subnet --enable_dhcp=False --allocation-pool=start=192.168.1.150,end=192.168.1.250 --gateway=192.168.1.1 external_network 192.168.1.0/24
 neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
 Created a new subnet:
 +-------------------+--------------------------------------------------+
@@ -69,7 +69,7 @@ Created a new subnet:
 
 3
 
-[root@openstack ~(keystone_admin)]# neutron router-create Router1
+[root@openstack ~(keystone_admin)]# neutron router-create Router01
 neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
 Created a new router:
 +-------------------------+--------------------------------------+
@@ -97,9 +97,9 @@ Created a new router:
 
 4
 
-[root@openstack ~(keystone_admin)]# neutron router-gateway-set Router1 external_network
+[root@openstack ~(keystone_admin)]# neutron router-gateway-set Router01 external_network
 neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
-Set gateway for router Router1
+Set gateway for router Router01
 
 5
 [root@openstack ~(keystone_admin)]# neutron net-create Internal_network
@@ -168,8 +168,8 @@ Created a new subnet:
 
 7
 
-[root@openstack ~(keystone_admin)]# neutron router-interface-add Router1 Internal_subnet
+[root@openstack ~(keystone_admin)]# neutron router-interface-add Router01 Internal_subnet
 neutron CLI is deprecated and will be removed in the future. Use openstack CLI instead.
-Added interface b6a59a18-2ce8-44d8-a22c-a2723e53704d to router Router1.
+Added interface b6a59a18-2ce8-44d8-a22c-a2723e53704d to router Router01.
 
 #End
