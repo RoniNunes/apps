@@ -1,0 +1,29 @@
+
+  206  . keystonerc_admin 
+  207  neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external
+  208  neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.122.10,end=192.168.122.20 lkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhcd
+  209  clear
+  210  neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.122.10,end=192.168.1.10 --gateway=192.168.1.1 --external_network 192.168.1.0/24
+  211  neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.122.10,end=192.168.1.10 --gateway=192.168.1.1 external_network 192.168.1.0/24
+  212  neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.1.10,end=192.168.1.10 --gateway=192.168.1.1 external_network 192.168.1.0/24
+  213  neutron router-create router1
+  214  neutron router-gateway-set router1 external_network
+  215  neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external
+  216  neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.1.20,end=192.168.1.10 --gateway=192.168.1.1 external_network 192.168.1.0/24
+  217  . keystonerc_admin 
+  218  neutron net-create external_network --provider:network_type flat --provider:physical_network extnet  --router:external
+  219  neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.1.20,end=192.168.1.20 --gateway=192.168.1.1 external_network 192.168.1.0/24
+  220  neutron router-create Router1
+  221  neutron router-gateway-set Router1 external_network
+  222  neutron net-create Internal_network
+  223  neutron subnet-create --name Internal_subnet Internal_network 10.0.0.0/24
+  224  neutron router-interface-add Router1 Internal_subnet
+  225  openstack network create Interna20 --project admin
+  226  openstack subnet create Sub_Interna20 --network Interna20 --subnet-range 20.0.0.0/24 --allocation-pool start=20.0.0.0,end=20.0.0.250
+  227  openstack subnet create Sub_Interna20 --network Interna20 --subnet-range 20.0.0.0/24 --allocation-pool start=20.0.0.0,end=20.0.0.240
+  228  openstack subnet create Sub_Interna20 --network Interna20 --subnet-range 20.0.0.0/24 --allocation-pool start=20.0.0.0,end=20.0.0.100
+  229  openstack subnet create Sub_Interna20 --network Interna20 --subnet-range 20.0.0.0/24 --allocation-pool start=20.0.0.0,end=20.0.0.50
+  230  openstack subnet create Sub_Interna20 --network Interna20 --subnet-range 20.0.0.0/24 --allocation-pool start=20.0.0.1,end=20.0.0.150
+  231  openstack subnet create Sub_Interna20 --network Interna20 --subnet-range 20.1.1.1/24 --allocation-pool start=20.1.1.1,end=20.1.1.240
+  232  openstack subnet create Sub_Interna20 --network Interna20 --subnet-range 20.1.1.1/24
+ 
